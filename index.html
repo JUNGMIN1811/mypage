@@ -217,16 +217,29 @@
   .modal-no-link { font-size: 13px; color: var(--text-muted); }
 
   /* BLOG */
-  .blog-coming {
-    background: var(--surface); border-radius: 16px; padding: 3.5rem 2rem;
-    text-align: center; border: 1.5px dashed var(--border);
+  .blog-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .blog-post {
+    background: var(--surface); border-radius: 16px; padding: 2rem 2rem 1.5rem;
+    border: 0.5px solid var(--border); cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.2s;
   }
-  .blog-coming .big-emoji { font-size: 40px; margin-bottom: 1rem; }
-  .blog-coming h3 {
+  .blog-post:hover { box-shadow: 0 4px 24px rgba(0,0,0,0.10); transform: translateY(-2px); }
+  .blog-post-date {
+    font-size: 12px; color: var(--accent); font-weight: 600;
+    letter-spacing: 0.08em; margin-bottom: 0.5rem; text-transform: uppercase;
+  }
+  .blog-post-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 22px; font-weight: 400; margin-bottom: 0.5rem;
+    font-size: 20px; font-weight: 400; margin-bottom: 1rem; color: var(--text);
   }
-  .blog-coming p { font-size: 14px; color: var(--text-muted); }
+  .blog-post-body { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+  .blog-post-body ul { margin: 0.3rem 0 0.3rem 1.2rem; padding: 0; }
+  .blog-post-body li { margin-bottom: 0.2rem; }
+  .blog-post-body .blog-section { margin-top: 0.8rem; font-weight: 600; color: var(--text); font-size: 13px; }
+  .blog-post-body .blog-tip {
+    margin-top: 0.8rem; background: var(--bg); border-left: 3px solid var(--accent);
+    border-radius: 6px; padding: 0.6rem 0.9rem; font-size: 13px; color: var(--text-muted);
+  }
 
   /* CONTACT */
   .contact-card {
@@ -393,10 +406,41 @@
     <div class="section-divider"></div>
     <p class="section-desc" style="margin-top:0.5rem">개발하며 배운 것들을 기록합니다.</p>
   </div>
-  <div class="blog-coming reveal">
-    <div class="big-emoji">✍️</div>
-    <h3>Coming Soon</h3>
-    <p>곧 글을 채워나갈 예정이에요. 기대해주세요!</p>
+  <div class="blog-list reveal">
+
+    <div class="blog-post">
+      <div class="blog-post-date">2025년 5월 6일</div>
+      <div class="blog-post-title">Claude + Cursor로 개발 환경 세팅하기</div>
+      <div class="blog-post-body">
+
+        <div class="blog-section">설치한 것들</div>
+        <ul>
+          <li>Claude 설치</li>
+          <li>Cursor 설치</li>
+          <li>Cursor 확장팩 추가 — Live Server</li>
+          <li>Git 설치</li>
+        </ul>
+
+        <div class="blog-section">역할 분담</div>
+        <p>토큰 사용량 때문에 <strong>Claude가 설계</strong>, <strong>Cursor가 개발</strong>을 담당하는 방식으로 운영.</p>
+
+        <div class="blog-section">작업 흐름</div>
+        <ul>
+          <li>Plan 모드 → Auto-accept → 검증 피드백 루프 (90% 이상 일치할 때까지)</li>
+          <li>단계별로 하나씩 확인하면서 작업</li>
+          <li>프롬프트는 구체적으로 작성</li>
+        </ul>
+
+        <div class="blog-tip">
+          💡 <code>/compact</code> 명령어를 사용하면 토큰을 절약할 수 있음.
+        </div>
+
+        <div class="blog-section">배포</div>
+        <p>Vercel을 통해 링크 배포 — 보안을 적용한 배포가 가능하기 때문에 선택.</p>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
