@@ -5,6 +5,7 @@ JM의 개인 포트폴리오 홈페이지입니다. **순수 HTML/CSS/JS 단일 
 ## 미리보기
 
 - 배포 링크(GitHub Pages): `https://jungmin1811.github.io/mypage/`
+- 배포 링크(Vercel): `https://mypage-one-bay.vercel.app/`
 - 데모(최근 프로젝트 링크): `https://jungmin1811.github.io/todo-app-0506/`
 
 ## 실행 방법
