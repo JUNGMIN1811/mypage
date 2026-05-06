@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>JM — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #fffaf5;
+    --surface: #fff;
+    --text: #2c2c2a;
+    --text-muted: #888780;
+    --accent: #d85a30;
+    --accent-light: #faece7;
+    --accent-2: #1d9e75;
+    --accent-2-light: #e1f5ee;
+    --border: rgba(0,0,0,0.1);
+    --tag-bg: #faeeda;
+    --tag-text: #854f0b;
+  }
+  [data-theme="dark"] {
+    --bg: #1e1c1a;
+    --surface: #2c2a27;
+    --text: #f1efe8;
+    --text-muted: #b4b2a9;
+    --accent: #f0997b;
+    --accent-light: #4a1b0c;
+    --accent-2: #5dcaa5;
+    --accent-2-light: #04342c;
+    --border: rgba(255,255,255,0.1);
+    --tag-bg: #412402;
+    --tag-text: #fac775;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: 'Gowun Dodum', sans-serif;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* NAV */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem; background: var(--surface);
+    border-bottom: 0.5px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; color: var(--accent); letter-spacing: 1px;
+  }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    font-size: 14px; color: var(--text-muted); text-decoration: none;
+    cursor: pointer; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .theme-btn {
+    background: var(--accent-light); border: none; border-radius: 20px;
+    padding: 6px 14px; font-size: 13px; color: var(--accent);
+    cursor: pointer; font-family: 'Gowun Dodum', sans-serif;
+    transition: background 0.2s;
+  }
+  .theme-btn:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    text-align: center; padding: 6rem 2rem 5rem;
+    max-width: 700px; margin: 0 auto;
+  }
+  .hero-avatar {
+    width: 88px; height: 88px; border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    background: var(--accent-light);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Serif Display', serif;
+    font-size: 30px; color: var(--accent);
+    border: 3px solid var(--accent);
+    animation: pop 0.6s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .hero h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px; font-weight: 400; margin-bottom: 0.75rem;
+    animation: fadeUp 0.6s 0.15s both;
+  }
+  .hero p {
+    font-size: 16px; color: var(--text-muted); line-height: 1.8;
+    margin-bottom: 1.75rem;
+    animation: fadeUp 0.6s 0.25s both;
+  }
+  @keyframes fadeUp {
+    from { transform: translateY(16px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  .hero-tags {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    justify-content: center; margin-bottom: 2rem;
+    animation: fadeUp 0.6s 0.35s both;
+  }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-text);
+    font-size: 12px; padding: 5px 14px; border-radius: 20px;
+  }
+  .hero-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--accent); color: #fff;
+    padding: 12px 24px; border-radius: 24px;
+    text-decoration: none; font-size: 14px;
+    transition: opacity 0.2s, transform 0.15s;
+    animation: fadeUp 0.6s 0.45s both;
+  }
+  .hero-link:hover { opacity: 0.88; transform: translateY(-2px); }
+
+  /* SECTIONS */
+  section { padding: 4rem 2rem; max-width: 800px; margin: 0 auto; }
+  .section-header { margin-bottom: 2rem; }
+  .section-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px; font-weight: 400;
+    color: var(--text); margin-bottom: 0.4rem;
+  }
+  .section-desc { font-size: 14px; color: var(--text-muted); }
+  .section-divider {
+    width: 40px; height: 3px; background: var(--accent);
+    border-radius: 2px; margin: 0.6rem 0 0;
+  }
+
+  /* ABOUT */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .about-card {
+    background: var(--surface); border-radius: 14px; padding: 1.5rem;
+    border: 0.5px solid var(--border);
+  }
+  .about-card-title {
+    font-size: 13px; color: var(--text-muted); margin-bottom: 1rem;
+    text-transform: uppercase; letter-spacing: 0.05em;
+  }
+  .skill-row { display: flex; flex-direction: column; gap: 12px; }
+  .skill-item { display: flex; flex-direction: column; gap: 5px; }
+  .skill-label { font-size: 13px; display: flex; justify-content: space-between; color: var(--text); }
+  .skill-level { color: var(--text-muted); font-size: 12px; }
+  .skill-bar { height: 6px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .skill-fill {
+    height: 100%; border-radius: 4px; background: var(--accent);
+    transform-origin: left; animation: barGrow 1s 0.5s cubic-bezier(.4,0,.2,1) both;
+  }
+  @keyframes barGrow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+  .timeline { display: flex; flex-direction: column; gap: 14px; }
+  .tl-item { display: flex; gap: 12px; align-items: flex-start; }
+  .tl-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    background: var(--accent); margin-top: 5px; flex-shrink: 0;
+  }
+  .tl-content p { font-size: 14px; font-weight: 500; }
+  .tl-content span { font-size: 12px; color: var(--text-muted); }
+
+  /* PORTFOLIO */
+  .proj-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .proj-card {
+    background: var(--surface); border-radius: 14px; padding: 1.5rem;
+    border: 0.5px solid var(--border); cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .proj-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(216,90,48,0.1); }
+  .proj-emoji { font-size: 30px; margin-bottom: 0.75rem; }
+  .proj-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 0.5rem; }
+  .proj-card p { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-bottom: 1rem; }
+  .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .proj-tag {
+    background: var(--accent-2-light); color: var(--accent-2);
+    font-size: 11px; padding: 3px 10px; border-radius: 10px;
+  }
+
+  /* MODAL */
+  .modal-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,0.45); z-index: 200;
+    align-items: center; justify-content: center; padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--surface); border-radius: 18px; padding: 2rem;
+    width: min(480px, 100%); border: 0.5px solid var(--border);
+    position: relative; max-height: 85vh; overflow-y: auto;
+    animation: modalIn 0.25s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  @keyframes modalIn {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  .modal-close {
+    position: absolute; top: 1rem; right: 1rem;
+    background: none; border: none; font-size: 20px;
+    color: var(--text-muted); cursor: pointer; line-height: 1;
+  }
+  .modal-close:hover { color: var(--accent); }
+  .modal h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; font-weight: 400; margin-bottom: 0.5rem;
+  }
+  .modal p { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 1rem; }
+  .modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+  .modal-link {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; color: var(--accent); text-decoration: none;
+    border: 0.5px solid var(--accent); padding: 8px 16px;
+    border-radius: 20px; transition: background 0.15s;
+  }
+  .modal-link:hover { background: var(--accent-light); }
+  .modal-no-link { font-size: 13px; color: var(--text-muted); }
+
+  /* BLOG */
+  .blog-coming {
+    background: var(--surface); border-radius: 16px; padding: 3.5rem 2rem;
+    text-align: center; border: 1.5px dashed var(--border);
+  }
+  .blog-coming .big-emoji { font-size: 40px; margin-bottom: 1rem; }
+  .blog-coming h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px; font-weight: 400; margin-bottom: 0.5rem;
+  }
+  .blog-coming p { font-size: 14px; color: var(--text-muted); }
+
+  /* CONTACT */
+  .contact-card {
+    background: var(--surface); border-radius: 16px; padding: 2.5rem 2rem;
+    border: 0.5px solid var(--border); text-align: center;
+  }
+  .contact-card p { font-size: 15px; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.75rem; }
+  .contact-links { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
+  .contact-link {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 10px 22px; border-radius: 22px; font-size: 14px;
+    text-decoration: none; border: 0.5px solid var(--border);
+    color: var(--text); transition: background 0.15s, border-color 0.15s, color 0.15s;
+    font-family: 'Gowun Dodum', sans-serif;
+  }
+  .contact-link:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 2rem; font-size: 13px;
+    color: var(--text-muted); border-top: 0.5px solid var(--border);
+  }
+
+  /* SCROLL ANIMATION */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    nav { padding: 0.75rem 1rem; }
+    .nav-links { display: none; }
+    section { padding: 3rem 1rem; }
+    .about-grid { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 28px; }
+    .hero { padding: 4rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body data-theme="light" id="root">
+
+<nav>
+  <span class="nav-logo">JM</span>
+  <div class="nav-links">
+    <a onclick="scrollToSection('about')">About</a>
+    <a onclick="scrollToSection('portfolio')">Portfolio</a>
+    <a onclick="scrollToSection('blog')">Blog</a>
+    <a onclick="scrollToSection('contact')">Contact</a>
+  </div>
+  <button class="theme-btn" onclick="toggleTheme()" id="theme-btn">🌙 Dark</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-avatar">JM</div>
+  <h1>안녕하세요, JM입니다 👋</h1>
+  <p>대학 전산실에 근무하고 있는 10년차 개발자<br>사용자에게 필요한 것을 만드는 일을 좋아합니다.</p>
+  <div class="hero-tags">
+    <span class="tag">JavaScript</span>
+    <span class="tag">PowerBuilder</span>
+    <span class="tag">NexaCro</span>
+    <span class="tag">Oracle DBMS</span>
+  </div>
+  <a class="hero-link" href="https://jungmin1811.github.io/todo-app-0506/" target="_blank">
+    🔗 최근 프로젝트 보기
+  </a>
+</div>
+
+<section id="about">
+  <div class="section-header reveal">
+    <div class="section-title">About</div>
+    <div class="section-divider"></div>
+    <p class="section-desc" style="margin-top:0.5rem">기술과 사람 사이를 잇는 것에 관심이 많습니다.</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-card reveal">
+      <div class="about-card-title">기술 스택</div>
+      <div class="skill-row">
+        <div class="skill-item">
+          <span class="skill-label">JavaScript <span class="skill-level">상</span></span>
+          <div class="skill-bar"><div class="skill-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-label">Oracle DBMS <span class="skill-level">상</span></span>
+          <div class="skill-bar"><div class="skill-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-label">NexaCro <span class="skill-level">중</span></span>
+          <div class="skill-bar"><div class="skill-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-item">
+          <span class="skill-label">PowerBuilder <span class="skill-level">중</span></span>
+          <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="about-card reveal">
+      <div class="about-card-title">경력 타임라인</div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <p>대학 전산실 재직 중</p>
+            <span>10년차 · 현재</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--accent-2)"></div>
+          <div class="tl-content">
+            <p>Claude Code 수업 수강</p>
+            <span>2026 · 성장 중 🌱</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:var(--text-muted)"></div>
+          <div class="tl-content">
+            <p>개발 커리어 시작</p>
+            <span>약 10년 전</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="section-header reveal">
+    <div class="section-title">Portfolio</div>
+    <div class="section-divider"></div>
+    <p class="section-desc" style="margin-top:0.5rem">카드를 클릭하면 자세한 내용을 볼 수 있어요.</p>
+  </div>
+  <div class="proj-grid">
+    <div class="proj-card reveal" onclick="openModal(0)">
+      <div class="proj-emoji">✅</div>
+      <h3>Todo App</h3>
+      <p>할 일 관리를 간편하게. 로컬스토리지 기반의 심플한 투두 앱입니다.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">JavaScript</span>
+        <span class="proj-tag">HTML/CSS</span>
+      </div>
+    </div>
+    <div class="proj-card reveal" onclick="openModal(1)">
+      <div class="proj-emoji">🏫</div>
+      <h3>대학 업무 자동화</h3>
+      <p>반복 행정 업무를 자동화해 담당자의 수작업을 80% 줄인 사내 도구입니다.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">NexaCro</span>
+        <span class="proj-tag">Oracle</span>
+      </div>
+    </div>
+    <div class="proj-card reveal" onclick="openModal(2)">
+      <div class="proj-emoji">📊</div>
+      <h3>데이터 조회 대시보드</h3>
+      <p>Oracle DB 연동 실시간 현황 조회 대시보드. 검색 필터 및 엑셀 출력 기능 포함.</p>
+      <div class="proj-tags">
+        <span class="proj-tag">PowerBuilder</span>
+        <span class="proj-tag">Oracle</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="section-header reveal">
+    <div class="section-title">Blog</div>
+    <div class="section-divider"></div>
+    <p class="section-desc" style="margin-top:0.5rem">개발하며 배운 것들을 기록합니다.</p>
+  </div>
+  <div class="blog-coming reveal">
+    <div class="big-emoji">✍️</div>
+    <h3>Coming Soon</h3>
+    <p>곧 글을 채워나갈 예정이에요. 기대해주세요!</p>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-header reveal">
+    <div class="section-title">Contact</div>
+    <div class="section-divider"></div>
+    <p class="section-desc" style="margin-top:0.5rem">함께 이야기 나눠요!</p>
+  </div>
+  <div class="contact-card reveal">
+    <p>새로운 인연, 협업 제안, 혹은 가벼운 인사도 환영합니다 😊<br>평균 응답 시간: 1~2일 이내</p>
+    <div class="contact-links">
+      <a class="contact-link" href="https://jungmin1811.github.io/todo-app-0506/" target="_blank">
+        🐙 GitHub
+      </a>
+      <a class="contact-link" href="mailto:jm@example.com">
+        ✉️ 이메일 보내기
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 JM · Made with ☕ and curiosity
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+  const projects = [
+    {
+      emoji: '✅',
+      title: 'Todo App',
+      desc: '할 일 관리를 간편하게 할 수 있는 투두 앱입니다. 로컬스토리지를 활용해 새로고침 후에도 데이터가 유지되며, 완료 체크·삭제·추가 기능을 직관적인 UI로 구현했습니다.',
+      tags: ['JavaScript', 'HTML/CSS'],
+      link: 'https://jungmin1811.github.io/todo-app-0506/'
+    },
+    {
+      emoji: '🏫',
+      title: '대학 업무 자동화',
+      desc: '행정 담당자가 매일 수작업으로 처리하던 반복 업무(공문 출력, 데이터 집계 등)를 자동화한 사내 도구입니다. 도입 후 수작업 시간이 약 80% 감소했습니다.',
+      tags: ['NexaCro', 'Oracle DBMS', 'PL/SQL'],
+      link: null
+    },
+    {
+      emoji: '📊',
+      title: '데이터 조회 대시보드',
+      desc: 'Oracle DB와 연동해 부서별 현황을 실시간으로 조회할 수 있는 대시보드입니다. 날짜·부서 필터, 엑셀 다운로드 기능을 포함하며 비개발자도 쉽게 사용할 수 있도록 UI를 설계했습니다.',
+      tags: ['PowerBuilder', 'Oracle DBMS'],
+      link: null
+    }
+  ];
+
+  function openModal(idx) {
+    const p = projects[idx];
+    document.getElementById('modal-content').innerHTML =
+      '<div style="font-size:32px;margin-bottom:0.75rem">' + p.emoji + '</div>' +
+      '<h2>' + p.title + '</h2>' +
+      '<p>' + p.desc + '</p>' +
+      '<div class="modal-tags">' + p.tags.map(function(t){ return '<span class="proj-tag">' + t + '</span>'; }).join('') + '</div>' +
+      (p.link
+        ? '<a class="modal-link" href="' + p.link + '" target="_blank">🔗 프로젝트 보기</a>'
+        : '<span class="modal-no-link">🔒 사내 프로젝트로 링크가 없습니다</span>');
+    document.getElementById('modal-overlay').classList.add('open');
+  }
+
+  function closeModal() {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+
+  function closeModalOutside(e) {
+    if (e.target === document.getElementById('modal-overlay')) closeModal();
+  }
+
+  // 저장된 테마 또는 OS 설정을 반영해 초기 테마 적용
+  (function() {
+    var saved = localStorage.getItem('theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+    document.getElementById('root').setAttribute('data-theme', theme);
+    document.getElementById('theme-btn').textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+  })();
+
+  function toggleTheme() {
+    var root = document.getElementById('root');
+    var btn = document.getElementById('theme-btn');
+    var isDark = root.getAttribute('data-theme') === 'dark';
+    var next = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    btn.textContent = isDark ? '🌙 Dark' : '☀️ Light';
+    // 사용자 선택을 localStorage에 저장
+    localStorage.setItem('theme', next);
+  }
+
+  function scrollToSection(id) {
+    var el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Scroll reveal
+  var reveals = document.querySelectorAll('.reveal');
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(function(el) { observer.observe(el); });
+</script>
+</body>
+</html>
